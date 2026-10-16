@@ -1,0 +1,3 @@
+KLASC security recheck - October 16, 2026
+Web key: sign-up/sign-in, wrong-password rejection, second-client owner read, cross-account and anonymous denials, sanitized public snapshot and revocation PASS
+Android key: sign-up/sign-in, wrong-password rejection, second-client owner read, cross-account and anonymous denials, sanitized public snapshot and revocation PASS

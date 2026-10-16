@@ -5,6 +5,7 @@ A personal save-for-later app for notes, links, code snippets, and images. Save 
 **Submission version: 3.1.0 (Android version code 5).** Stages 1 and 2 are implemented; Stage 3 share intake and public read-only links are implemented. Native Android Share-menu testing on a physical phone remains pending.
 
 - [Class project report](docs/REPORT.md)
+- [Download the Task 2 report as PDF](docs/submission/KLASC_Task2_Report.pdf)
 - [Architecture and data model](docs/ARCHITECTURE.md)
 - [Setup and testing](docs/SETUP.md)
 - [Verification evidence](docs/TESTING.md)
@@ -50,3 +51,5 @@ Local and cloud libraries are separate; signing in does not upload local saves. 
 Recorded checks: 24 Flutter tests, 12 emulator security tests, clean analysis, and live Chrome sign-in/save/search/edit/archive/restore/public-link/revocation checks. Android physical Share-menu testing, iOS distribution, and narrow-screen Chrome testing remain unverified. Details and dates are in [TESTING.md](docs/TESTING.md).
 
 Earlier development took place locally on October 12–13, 2026. This previously empty repository was populated on October 16; its new commit history records the import and submission work honestly, without backdated development commits.
+
+Security alert review: the two Firebase client identifiers were verified and restricted to six Firebase APIs; both GitHub alerts are resolved as false positives. See [SECURITY.md](SECURITY.md) for the review and remaining hardening work.

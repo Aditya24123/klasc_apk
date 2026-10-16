@@ -77,3 +77,7 @@ It exercises local CRUD and reopening a dedicated `klasc_device_test.db`, separa
 The recorded Chrome pass remained at 1536 × 673 pixels, so it does not establish narrow-screen browser behavior. Browser file-image upload, signup UI, and permanent-delete UI were not exercised in that pass; automated/backend coverage supports related validations and permissions. Native Share-menu behavior still needs the physical-device demonstration above. iOS is unbuilt and has no share extension. No performance/load test of a very large inbox is claimed.
 
 Recorded cleanup removed synthetic test accounts, items, and public sharing documents. Private sequence metadata remained under deleted synthetic UIDs, as noted in the original records. No temporary test passwords or account fixtures are included in this repository.
+
+## Security recheck after API restrictions
+
+On October 16, live SDK checks passed with both the Web and Android client keys after narrowing their API scope. The checks cover authentication, ownership isolation, anonymous public snapshots, and revocation. See [the results](evidence/security-recheck-2026-10-16.txt) and [the verified allowlists](evidence/firebase-api-restrictions.json). This is not a physical-device Android runtime pass. The repository credential guard and its self-test also passed.

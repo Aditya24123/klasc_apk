@@ -73,6 +73,11 @@ A public snapshot contains only `type`, `title`, `content`, `imageData`, and `sh
 
 Revoke deletes the snapshot and mappings transactionally; app deletion of a shared source also removes them. The viewer fetches from the server and rechecks an available link every 30 seconds. Revocation denies subsequent reads, although an already open view can remain visible until its next check. Revocation cannot erase screenshots or content a recipient already copied. Backend authorization protects users from one another; the project does not implement end-to-end encryption against Firebase administrators.
 
+## Security alert review on October 16
+
+GitHub flagged the two Firebase-generated client API keys. Their provider metadata confirmed existing Firebase API restrictions, and those broad default allowlists were narrowed to six Firebase services. Both alerts were resolved as false positives for public Firebase identifiers, not marked revoked. No private service-account key, password, or GitHub token was found by the focused source/history checks.
+
+After the restriction changes, live SDK tests with each client key passed sign-up/sign-in, incorrect-password rejection, same-account second-client reads, direct cross-account and anonymous denials, sanitized public snapshots, and revocation. These are SDK checks, not a new physical Android test. [SECURITY.md](../SECURITY.md) records the policy, limitations, references, and credential guard. App Check and client-origin/package enforcement remain future hardening work; API restrictions do not eliminate authentication quota abuse.
 ## Important decisions
 
 | Decision | Reason and tradeoff |

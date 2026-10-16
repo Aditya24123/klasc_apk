@@ -1,0 +1,54 @@
+[
+  {
+    "displayName": "Android key (auto created by Firebase)",
+    "restrictions": {
+      "androidKeyRestrictions": {},
+      "apiTargets": [
+        {
+          "service": "identitytoolkit.googleapis.com"
+        },
+        {
+          "service": "securetoken.googleapis.com"
+        },
+        {
+          "service": "firestore.googleapis.com"
+        },
+        {
+          "service": "firebase.googleapis.com"
+        },
+        {
+          "service": "firebaseinstallations.googleapis.com"
+        },
+        {
+          "service": "firebaseappcheck.googleapis.com"
+        }
+      ]
+    }
+  },
+  {
+    "displayName": "Browser key (auto created by Firebase)",
+    "restrictions": {
+      "browserKeyRestrictions": {},
+      "apiTargets": [
+        {
+          "service": "identitytoolkit.googleapis.com"
+        },
+        {
+          "service": "securetoken.googleapis.com"
+        },
+        {
+          "service": "firestore.googleapis.com"
+        },
+        {
+          "service": "firebase.googleapis.com"
+        },
+        {
+          "service": "firebaseinstallations.googleapis.com"
+        },
+        {
+          "service": "firebaseappcheck.googleapis.com"
+        }
+      ]
+    }
+  }
+]
