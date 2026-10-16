@@ -1,0 +1,36 @@
+name: klasc
+description: A quiet home for things worth keeping.
+publish_to: none
+version: 3.1.0+5
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  sqflite: ^2.4.2
+  path: ^1.9.1
+  image_picker: ^1.1.2
+  url_launcher: ^6.3.2
+  sqflite_common_ffi_web: 0.4.5+4
+  firebase_core: ^4.0.0
+  firebase_auth: ^6.0.0
+  cloud_firestore: ^6.0.0
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+  sqflite_common_ffi: '>=2.3.6 <2.4.0'
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/firebase-config.json
+    - assets/branding/klasc-symbol.png
+  fonts:
+    - family: BebasNeue
+      fonts:
+        - asset: assets/fonts/BebasNeue-Regular.ttf
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito.ttf

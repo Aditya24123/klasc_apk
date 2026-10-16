@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "988506867887",
+    "project_id": "klasc-8d959",
+    "storage_bucket": "klasc-8d959.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988506867887:android:4ca88f8ab76e321129ac5a",
+        "android_client_info": {
+          "package_name": "com.klasc.klasc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi58ZKAJKiHFydDypyfMtA-Sjc5Kn9u9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

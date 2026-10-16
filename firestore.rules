@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owns(uid) { return request.auth != null && request.auth.uid == uid; }
+    function validItem(uid, itemId) {
+      let d = request.resource.data;
+      return d.keys().hasAll(['id','ownerId','type','title','content','tags','created','updated','archived','imageData'])
+        && d.keys().hasOnly(['id','ownerId','type','title','content','tags','created','updated','archived','imageData'])
+        && d.ownerId == uid && d.id is int && d.id > 0 && itemId == string(d.id)
+        && d.type in ['note','link','snippet','image']
+        && d.title is string && d.title.size() > 0 && d.title.size() <= 120
+        && d.content is string && d.content.size() <= 50000
+        && (!(d.type in ['note','snippet']) || d.content.size() > 0)
+        && (d.type != 'link' || d.content.matches('https?://[^\\s]+'))
+        && d.tags is list && d.tags.size() <= 20
+        && d.created is timestamp && d.updated == request.time && d.archived is bool
+        && ((d.type == 'image' && d.imageData is string && d.imageData.size() > 0 && d.imageData.size() <= 699052)
+          || (d.type != 'image' && d.imageData == null));
+    }
+    match /users/{uid}/items/{itemId} {
+      allow read, delete: if owns(uid);
+      allow create: if owns(uid) && validItem(uid, itemId) && request.resource.data.created == request.time;
+      allow update: if owns(uid) && validItem(uid, itemId)
+        && request.resource.data.ownerId == resource.data.ownerId
+        && request.resource.data.id == resource.data.id
+        && request.resource.data.created == resource.data.created;
+    }
+    match /users/{uid}/meta/sequence {
+      allow read: if owns(uid);
+      allow create: if owns(uid) && request.resource.data.keys().hasOnly(['nextId']) && request.resource.data.nextId == 2;
+      allow update: if owns(uid) && request.resource.data.keys().hasOnly(['nextId'])
+        && request.resource.data.nextId is int && request.resource.data.nextId == resource.data.nextId + 1;
+    }
+    function shareOwner(token) {
+      return get(/databases/$(database)/documents/shareOwners/$(token)).data;
+    }
+    function liveShare(token) {
+      let owner = shareOwner(token);
+      return token.matches('^[a-f0-9]{64}$')
+        && get(/databases/$(database)/documents/users/$(owner.ownerId)/shares/$(owner.itemId)).data.token == token
+        && get(/databases/$(database)/documents/users/$(owner.ownerId)/items/$(owner.itemId)).data.created == owner.sourceCreated;
+    }
+    match /users/{uid}/shares/{itemId} {
+      allow get, delete: if owns(uid);
+      allow create: if owns(uid) && request.resource.data.keys().hasOnly(['token'])
+        && request.resource.data.token is string && request.resource.data.token.matches('^[a-f0-9]{64}$')
+        && getAfter(/databases/$(database)/documents/shareOwners/$(request.resource.data.token)).data.ownerId == uid
+        && getAfter(/databases/$(database)/documents/shareOwners/$(request.resource.data.token)).data.itemId == itemId;
+    }
+    match /shareOwners/{token} {
+      allow get, delete: if owns(resource.data.ownerId);
+      allow create: if owns(request.resource.data.ownerId)
+        && token.matches('^[a-f0-9]{64}$')
+        && request.resource.data.keys().hasOnly(['ownerId','itemId','sourceCreated'])
+        && request.resource.data.itemId is string
+        && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)/shares/$(request.resource.data.itemId)).data.token == token
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)/items/$(request.resource.data.itemId)).data.created == request.resource.data.sourceCreated;
+    }
+    match /publicShares/{token} {
+      allow get: if liveShare(token);
+      // Listing, collection-group access, updates, and visitor writes are denied.
+      allow delete: if owns(shareOwner(token).ownerId);
+      allow create: if owns(getAfter(/databases/$(database)/documents/shareOwners/$(token)).data.ownerId)
+        && validPublic(token);
+    }
+    function validPublic(token) {
+      let owner = getAfter(/databases/$(database)/documents/shareOwners/$(token)).data;
+      let source = get(/databases/$(database)/documents/users/$(owner.ownerId)/items/$(owner.itemId)).data;
+      let d = request.resource.data;
+      return token.matches('^[a-f0-9]{64}$')
+        && d.keys().hasAll(['type','title','content','imageData','sharedAt'])
+        && d.keys().hasOnly(['type','title','content','imageData','sharedAt'])
+        && d.type == source.type && d.title == source.title && d.content == source.content
+        && d.imageData == source.imageData && d.sharedAt == request.time
+        && getAfter(/databases/$(database)/documents/users/$(owner.ownerId)/shares/$(owner.itemId)).data.token == token;
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

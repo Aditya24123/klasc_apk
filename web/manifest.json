@@ -1,0 +1,19 @@
+{
+  "name": "KLASC",
+  "short_name": "KLASC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0f0e",
+  "theme_color": "#0c0f0e",
+  "description": "Your ideas. With you. Save notes, links, code and images.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
