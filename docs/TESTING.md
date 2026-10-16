@@ -81,3 +81,7 @@ Recorded cleanup removed synthetic test accounts, items, and public sharing docu
 ## Security recheck after API restrictions
 
 On October 16, live SDK checks passed with both the Web and Android client keys after narrowing their API scope. The checks cover authentication, ownership isolation, anonymous public snapshots, and revocation. See [the results](evidence/security-recheck-2026-10-16.txt) and [the verified allowlists](evidence/firebase-api-restrictions.json). This is not a physical-device Android runtime pass. The repository credential guard and its self-test also passed.
+
+## Follow-up product checks
+
+The [post-security verification](POST_SECURITY_CHECK.md) records the successful live web login, note/link saves, reload and sign-in persistence, hosted sharing and UI revocation checks. It also records the initial signup connection error, unconfirmed in-app browser clipboard, and unavailable native-device checks without treating them as passes.

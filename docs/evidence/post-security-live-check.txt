@@ -1,0 +1,3 @@
+KLASC post-security APK-config live verification - October 16, 2026
+Web key: sign-up/sign-in, wrong-password rejection, second-client owner read, note/link/snippet/image saves, edit/archive/restore, cross-account and anonymous denials, sanitized public snapshot, snapshot stability after edit and revocation PASS
+Android key: sign-up/sign-in, wrong-password rejection, second-client owner read, note/link/snippet/image saves, edit/archive/restore, cross-account and anonymous denials, sanitized public snapshot, snapshot stability after edit and revocation PASS
