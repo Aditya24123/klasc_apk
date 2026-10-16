@@ -1,0 +1,22 @@
+KLASC 3.1 — Chrome interactive QA
+
+PASS: invalid password gives clear feedback.
+PASS: successful sign-in loads private inbox.
+PASS: custom username update appears in the inbox and survives sign-out/sign-in.
+PASS: note creation with title/body/tags saves to live Firebase.
+PASS: tag search filters the correct item.
+PASS: editing preserves body/tags and persists changed title.
+PASS: archive removes the item from inbox; restore returns it.
+PASS: public link is created and copied through the owner dialog.
+PASS: copied public URL renders only the selected title/content, without account/inbox/tag controls.
+PASS: public URL loads after signing out (anonymous browser request).
+PASS: signing out clears private inbox UI; signing back in and reloading preserve saved data.
+PASS: owner UI revocation returns Create public link; old URL displays This link is unavailable.
+PASS: sign-out before cleanup; synthetic accounts/items/sharing documents removed. Private synthetic sequence metadata remains under the deleted test UID.
+
+Automation notes: direct DOM fill did not update Flutter's controllers reliably; actual keyboard input was used and saved values verified. Chrome command timeouts/stale nodes were recovered by reading fresh UI state. No functional product failure was found in the exercised flows.
+
+Limits: viewport override did not apply to this Chrome session (1536x673 remained). Narrow-screen Chrome testing is not claimed. Native Android Share-menu/physical-phone runtime remains unverified. Browser file-image upload, sign-up UI, and UI delete were not exercised in this pass; existing automated/backend checks cover related validations and permissions.
+
+No app code changed during this check; KLASC 3.1 APK remains current.
+Proof: KLASC-3.1-Chrome-persisted.jpg, KLASC-3.1-Chrome-public.jpg, KLASC-3.1-Chrome-revoked.jpg.

@@ -1,0 +1,8 @@
+Email/password sign-up: PASS
+Incorrect credentials rejected: PASS
+Same account on a second SDK client sees saved data: PASS
+Account B direct read/list/edit/delete of Account A item: DENIED
+Owner edit/archive/restore visible to second client: PASS
+Private image appears for the same account on a second client; Account B denied: PASS
+Network loss gives a request error; retry after reconnect succeeds: PASS
+Owner deletion visible to second client: PASS

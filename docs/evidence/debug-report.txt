@@ -1,0 +1,30 @@
+KLASC 3.1 — Debug report
+
+Updated symbol: exact user-supplied PNG used for app branding, Android launcher and splash, browser favicon and web manifest.
+
+Fixed issues:
+- Shared text is no longer silently truncated; all startup shares are queued.
+- Unexpected subject values are ignored instead of throwing.
+- Invalid stored image data no longer crashes the public page or blocks inbox loading.
+- Older refresh responses/errors cannot overwrite newer results.
+- Late initialization cannot attach cloud listeners to a disposed screen; owned local databases close on exit.
+- Public-token requests time out and can be retried; clipboard failures offer manual copy feedback.
+- Switching public tokens discards earlier responses, revocation clears visible content, and unavailable links stop polling.
+- Public title/body have explicit screen-reader labels; failures opening external links show feedback.
+
+Verification:
+24 Flutter tests PASS; 12 backend security tests PASS; flutter analyze CLEAN.
+Live anonymous read and denied list/private metadata/source read/visitor edit/delete PASS; revoked token DENIED.
+Optimized APK/web builds PASS. Native package/signature/logo verified. Hosting deployed.
+Temporary test accounts/items and credentials cleaned; synthetic sequence metadata remains private to the deleted test UID.
+
+Limits:
+No Android phone was attached, so native Share-menu runtime verification remains pending.
+Chrome's browser connection was unavailable; the user chose to finish with available checks. Interactive browser checks were not completed in this pass.
+
+Download: https://drive.google.com/file/d/1lpLaZgRBLPjOElwLlWnveX3kjv-iziXd/view?usp=drivesdk
+Filename: KLASC-3.1.apk
+Size: 55,537,867 bytes
+Version: 3.1.0 (code 5)
+SHA-256: EFE0C3D7D1101256AF2A8B7EA5CFDAB91A753858C043841202CB56702CD4F2FF
+Install over the existing KLASC to preserve local data. Android 7+.
